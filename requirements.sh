@@ -24,32 +24,26 @@ if [ $? -ne 0 ]; then
     exit
 fi
 
-# TODO : locate first capstone
-rm -rf /usr/lib/python3.*/site-packages/capstone*
-rm -rf build
+python3 -m virtualenv -h > /dev/null
+if [ $? -ne 0 ]; then
+    echo "error: you need virtualenv to setup this project, go to https://virtualenv.pypa.io/ for details"
+    exit
+fi
 
-mkdir -p build
-cd build
+python3 -m virtualenv venv
+
+source venv/bin/activate
 
 CAPSTONE_VERSION=3.0.4
 
-# Capstone
-git clone -b $CAPSTONE_VERSION --depth 1 https://github.com/aquynh/capstone
-cd capstone/
-./make.sh
-sudo ./make.sh install
-
-# Bindings
-cd bindings/python
-sudo make install3
-cd ../../..
+pip3 install capstone==$CAPSTONE_VERSION
 
 # PE
 # https://github.com/erocarrera/pefile
-sudo -H pip3 install pefile
+pip3 install pefile
 
 # ELF
-sudo -H pip3 install pyelftools
+pip3 install pyelftools
 
 # Msgpack
-sudo -H pip3 install msgpack-python
+pip3 install msgpack-python

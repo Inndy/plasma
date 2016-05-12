@@ -23,6 +23,7 @@ It supports :
 * [python-pyelftools](https://github.com/eliben/pyelftools)
 * [pefile](https://github.com/erocarrera/pefile) + python3-future
 * [python-msgpack](https://github.com/msgpack/msgpack-python) >= 0.4.6
+* [virtualenv](https://virtualenv.pypa.io/) installed with python3
 * `c++filt` (available in the binutils Linux package)
 * terminal with 256 colors (if not, use the option `--nocolor`)
 
@@ -30,6 +31,7 @@ It supports :
 ## Installation
 
     ./requirements.sh
+    source venv/bin/activate
     python3 setup.py build_ext --inplace
     python3 setup.py install   # or create an alias to run_plasma.py
 
